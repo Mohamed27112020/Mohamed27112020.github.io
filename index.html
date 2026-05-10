@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Ashraf — Flutter & Odoo Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07090F;
+      --surface: #0F1520;
+      --border: #1E2535;
+      --text: #E2E8F0;
+      --muted: #64748B;
+      --hint: #475569;
+      --blue: #60A5FA;
+      --teal: #5DCAA5;
+      --amber: #FBBF24;
+      --red: #F87171;
+      --green: #86EFAC;
+      --purple: #AFA9EC;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .9rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+      background: rgba(7,9,15,0.96);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      color: var(--blue);
+      letter-spacing: -.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    /* ── HERO ── */
+    #about {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.75rem;
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #0F2847;
+      border: 1.5px solid #1E40AF44;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .hero-info { flex: 1; }
+
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #04221A;
+      border: 0.5px solid #1D9E7533;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--teal);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: .6rem;
+    }
+
+    .open-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+
+    .hero-info h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      color: #F1F5F9;
+      margin-bottom: 4px;
+    }
+
+    .hero-role {
+      font-size: 13px;
+      color: var(--blue);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 10px;
+    }
+
+    .hero-bio {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    .pill-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .pill {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      border: 0.5px solid;
+    }
+
+    .p-blue   { background: #0C1E3A; color: var(--blue);   border-color: #1D4ED833; }
+    .p-teal   { background: #04342C; color: var(--teal);   border-color: #1D9E7533; }
+    .p-purple { background: #1A1640; color: var(--purple);  border-color: #7F77DD33; }
+    .p-amber  { background: #2A1A05; color: var(--amber);  border-color: #D9770633; }
+    .p-green  { background: #0E2410; color: var(--green);  border-color: #16A34A33; }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 1.25rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .stat-l { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 1.75rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .sec-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--hint);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-wrap { display: flex; flex-direction: column; gap: 14px; }
+    .skill-group-label { font-size: 11px; color: var(--hint); margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .chip {
+      font-size: 12px;
+      padding: 4px 11px;
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      color: #94A3B8;
+      font-family: 'JetBrains Mono', monospace;
+      transition: border-color .2s, color .2s;
+    }
+
+    .chip:hover { border-color: #60A5FA55; color: var(--blue); }
+
+    /* ── PROJECTS ── */
+    #projects { scroll-margin-top: 60px; }
+
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .proj-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      transition: border-color .2s, transform .15s;
+    }
+
+    .proj-card:hover { border-color: #60A5FA44; transform: translateY(-3px); }
+
+    .proj-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .proj-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .proj-card h3 {
+      font-size: 13px;
+      font-weight: 500;
+      color: #F1F5F9;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.35;
+    }
+
+    .proj-sub { font-size: 10px; color: var(--hint); }
+
+    .proj-card p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .tag-row { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
+
+    .tag {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #0C1E3A;
+      color: var(--blue);
+      border: 0.5px solid #1D4ED822;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .tag-grade { background: #04221A; color: var(--teal); border-color: #1D9E7522; }
+
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .proj-link:hover { color: var(--blue); border-color: var(--blue); }
+
+    /* ── TIMELINE ── */
+    #experience { scroll-margin-top: 60px; }
+
+    .timeline { display: flex; flex-direction: column; }
+
+    .t-item { display: flex; gap: 1rem; padding-bottom: 1.25rem; }
+    .t-item:last-child { padding-bottom: 0; }
+
+    .t-line-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 4px;
+      width: 14px;
+      flex-shrink: 0;
+    }
+
+    .t-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid var(--bg);
+      outline: 1.5px solid #60A5FA44;
+      flex-shrink: 0;
+    }
+
+    .t-line { width: 1px; flex: 1; background: var(--border); margin-top: 5px; }
+
+    .t-body h4 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+    .t-body .co { font-size: 11px; color: var(--blue); font-family: 'JetBrains Mono', monospace; margin-bottom: 1px; }
+    .t-body .dt { font-size: 10px; color: var(--hint); font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; }
+    .t-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── COURSES ── */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+    }
+
+    .course-item {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: #94A3B8;
+      line-height: 1.4;
+    }
+
+    .course-item i { color: var(--blue); flex-shrink: 0; margin-top: 1px; }
+
+    /* ── CONTACT ── */
+    #contact { scroll-margin-top: 60px; }
+
+    .contact-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .cbtn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 0.5px solid var(--border);
+      background: var(--surface);
+      color: #94A3B8;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+
+    .cbtn:hover { border-color: var(--blue); color: var(--blue); }
+
+    .cbtn-drive {
+      border-color: #D9770633;
+      color: var(--amber);
+    }
+
+    .cbtn-drive:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 11px;
+      color: var(--hint);
+      font-family: 'JetBrains Mono', monospace;
+      border-top: 0.5px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: .8rem 1rem; }
+      .nav-links { gap: 1rem; }
+      #about { flex-direction: column; gap: 1rem; padding: 1.5rem 1rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); padding: 1rem; }
+      section { padding: 1.25rem 1rem; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .courses-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">MA.dev</span>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="about">
+    <div class="avatar">MA</div>
+    <div class="hero-info">
+      <div class="open-badge"><span class="open-dot"></span>open to opportunities</div>
+      <h1>Mohamed Ashraf</h1>
+      <div class="hero-role">// Software Engineer · Flutter & Odoo</div>
+      <p class="hero-bio">
+        A results-driven Software Engineer specializing in cross-platform mobile development with Flutter and business process automation using Odoo. Building high-performance apps and custom ERP modules that bridge mobile and enterprise systems.
+      </p>
+      <div class="pill-row">
+        <span class="pill p-blue">Flutter</span>
+        <span class="pill p-teal">Dart</span>
+        <span class="pill p-blue">Firebase</span>
+        <span class="pill p-purple">Odoo</span>
+        <span class="pill p-amber">BLoC / GetX</span>
+        <span class="pill p-green">Supabase</span>
+        <span class="pill p-teal">Clean Architecture</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="stat-n">1yr+</div><div class="stat-l">Experience</div></div>
+    <div class="stat"><div class="stat-n">4+</div><div class="stat-l">Projects</div></div>
+    <div class="stat"><div class="stat-n">A+</div><div class="stat-l">Grad project</div></div>
+    <div class="stat"><div class="stat-n">2</div><div class="stat-l">Job roles</div></div>
+  </div>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="sec-title">technical skills</div>
+    <div class="skills-wrap">
+      <div>
+        <div class="skill-group-label">mobile development</div>
+        <div class="skill-chips">
+          <span class="chip">Flutter</span>
+          <span class="chip">Dart</span>
+          <span class="chip">OOP</span>
+          <span class="chip">SOLID</span>
+          <span class="chip">Data Structures</span>
+          <span class="chip">BLoC / Cubit</span>
+          <span class="chip">GetX</span>
+          <span class="chip">Riverpod</span>
+          <span class="chip">Provider</span>
+          <span class="chip">Firebase Auth</span>
+          <span class="chip">Firestore</span>
+          <span class="chip">Firebase FCM</span>
+          <span class="chip">Firebase Storage</span>
+          <span class="chip">Supabase</span>
+          <span class="chip">Clean Architecture</span>
+          <span class="chip">Localization</span>
+          <span class="chip">Responsive UI</span>
+          <span class="chip">Error Handling</span>
+          <span class="chip">Google Maps SDK</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">odoo development</div>
+        <div class="skill-chips">
+          <span class="chip">Python</span>
+          <span class="chip">Odoo ORM</span>
+          <span class="chip">XML</span>
+          <span class="chip">JavaScript (Odoo)</span>
+          <span class="chip">Module Creation</span>
+          <span class="chip">QWeb Reports</span>
+          <span class="chip">Odoo.sh</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">web & tools</div>
+        <div class="skill-chips">
+          <span class="chip">Git</span>
+          <span class="chip">GitHub</span>
+          <span class="chip">Postman</span>
+          <span class="chip">Agile / Scrum</span>
+          <span class="chip">HTML5</span>
+          <span class="chip">CSS3</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">C</span>
+          <span class="chip">Java</span>
+          <span class="chip">MS Office</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-title">projects</div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon" style="background:#0C1E3A;">
+            <i class="ti ti-report-money" style="font-size:18px;color:#60A5FA;"></i>
+          </div>
+          <h3>Payroll App<br><span class="proj-sub">Giza Spin · 2025</span></h3>
+        </div>
+        <p>Internal company app with complete auth system, monthly salary breakdown (base pay, bonuses, deductions), and real-time attendance dashboard with status indicators.</p>
+        <div class="tag-row">
+          <span class="tag">Flutter</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Auth</span>
+          <span class="tag">Dashboard</span>
+        </div>
+        <!-- Replace # with your GitHub repo link or Google Drive link -->
+        <a class="proj-link" href="https://drive.google.com/drive/folders/1Doxn7tZsUYWKNSy9FsMzomKVEe4__xgp" target="_blank">
+          <i class="ti ti-folder" style="font-size:14px;"></i> view demo
+        </a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon" style="background:#0A1E12;">
+            <i class="ti ti-book" style="font-size:18px;color:#5DCAA5;"></i>
+          </div>
+          <h3>E-learning App<br><span class="proj-sub">Ideas & Concepts · 2025</span></h3>
+        </div>
+        <p>Full e-learning platform with course browsing, payment integration, and state management using GetX. Built during internship at Ideas and Concepts (Dammam, remote).</p>
+        <div class="tag-row">
+          <span class="tag">Flutter</span>
+          <span class="tag">GetX</span>
+          <span class="tag">Payments</span>
+          <span class="tag">REST API</span>
+        </div>
+        <!-- Replace # with your GitHub repo link -->
+        <a class="proj-link" href="https://github.com/Mohamed27112020?tab=repositories" target="_blank">
+          <i class="ti ti-brand-github" style="font-size:14px;"></i> view code
+        </a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon" style="background:#1A1005;">
+            <i class="ti ti-tools-kitchen-2" style="font-size:18px;color:#FBBF24;"></i>
+          </div>
+          <h3>Recipe App<br><span class="proj-sub">2025</span></h3>
+        </div>
+        <p>Food discovery app with 100+ recipes, search & filtering, shopping cart with price calculations, avatar upload, dark mode with persistent storage, and user profiles.</p>
+        <div class="tag-row">
+          <span class="tag">Flutter</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Dark Mode</span>
+          <span class="tag">Cart</span>
+        </div>
+        <a class="proj-link" href="https://github.com/Mohamed27112020?tab=repositories" target="_blank">
+          <i class="ti ti-brand-github" style="font-size:14px;"></i> view code
+        </a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-icon" style="background:#200A0A;">
+            <i class="ti ti-heart-rate-monitor" style="font-size:18px;color:#F87171;"></i>
+          </div>
+          <h3>Medical Emergency App<br><span class="proj-sub">Graduation Project · 2023</span></h3>
+        </div>
+        <p>Blood donation & request platform where users can send/accept blood type requests. Uses ML to classify burn degrees. State management: BLoC/Cubit. Backend: Firebase.</p>
+        <div class="tag-row">
+          <span class="tag">Flutter</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">ML</span>
+          <span class="tag">BLoC</span>
+          <span class="tag tag-grade">Grade A+</span>
+        </div>
+        <a class="proj-link" href="https://github.com/Mohamed27112020?tab=repositories" target="_blank">
+          <i class="ti ti-brand-github" style="font-size:14px;"></i> view code
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & EDUCATION -->
+  <section id="experience">
+    <div class="sec-title">experience & education</div>
+    <div class="timeline">
+
+      <div class="t-item">
+        <div class="t-line-col"><div class="t-dot"></div><div class="t-line"></div></div>
+        <div class="t-body">
+          <h4>Information Systems Engineer & Mobile Developer</h4>
+          <div class="co">Giza Spinning and Weaving Company</div>
+          <div class="dt">Nov 2025 – Present · Giza, Egypt</div>
+          <p>Managing and optimizing the company's IS programs. Designed and developed an internal mobile application to streamline company operations and improve workflow efficiency.</p>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-line-col"><div class="t-dot"></div><div class="t-line"></div></div>
+        <div class="t-body">
+          <h4>Flutter Developer Intern</h4>
+          <div class="co">Ideas and Concepts — Dammam (Remote)</div>
+          <div class="dt">Jun 2025 – Sept 2025</div>
+          <p>Built a full e-learning application with payment integration using GetX state management.</p>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-line-col"><div class="t-dot"></div></div>
+        <div class="t-body">
+          <h4>BSc Computers & Artificial Intelligence — Computer Science</h4>
+          <div class="co">Helwan University</div>
+          <div class="dt">Graduated June 2023 · Grade: Very Good</div>
+          <p>Final graduation project: Medical Emergency Mobile Application — awarded grade A+. Built with Flutter, Firebase, BLoC, and Machine Learning for burn degree classification.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section>
+    <div class="sec-title">courses & certifications</div>
+    <div class="courses-grid">
+      <div class="course-item"><i class="ti ti-certificate" style="font-size:15px;"></i>Flutter & Dart — Complete Course (2023)</div>
+      <div class="course-item"><i class="ti ti-certificate" style="font-size:15px;"></i>Flutter & Dart — Advanced Course (Nov 2023)</div>
+      <div class="course-item"><i class="ti ti-map-pin" style="font-size:15px;"></i>Flutter Google Maps Integration (2025)</div>
+      <div class="course-item"><i class="ti ti-building-arch" style="font-size:15px;"></i>Clean Architecture in Flutter (2025)</div>
+      <div class="course-item"><i class="ti ti-circle-letter-o" style="font-size:15px;"></i>Odoo 17 Development Course (2025)</div>
+      <div class="course-item"><i class="ti ti-network" style="font-size:15px;"></i>CCNA — Cisco Certified Network Associate (2022)</div>
+      <div class="course-item"><i class="ti ti-shield" style="font-size:15px;"></i>Intro to Network Security — Mahara-Tech (2022)</div>
+      <div class="course-item"><i class="ti ti-wifi" style="font-size:15px;"></i>Computer Network Fundamentals — Mahara-Tech (2022)</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sec-title">contact</div>
+    <div class="contact-row">
+      <a class="cbtn" href="mailto:ma422008@gmail.com">
+        <i class="ti ti-mail" style="font-size:16px;"></i> ma422008@gmail.com
+      </a>
+      <a class="cbtn" href="https://github.com/Mohamed27112020?tab=repositories" target="_blank">
+        <i class="ti ti-brand-github" style="font-size:16px;"></i> github
+      </a>
+      <a class="cbtn" href="https://www.linkedin.com/in/mohamed-ashraf-736930232/" target="_blank">
+        <i class="ti ti-brand-linkedin" style="font-size:16px;"></i> linkedin
+      </a>
+      <a class="cbtn" href="tel:+201065348238">
+        <i class="ti ti-phone" style="font-size:16px;"></i> +201065348238
+      </a>
+      <a class="cbtn cbtn-drive" href="https://drive.google.com/drive/folders/1Doxn7tZsUYWKNSy9FsMzomKVEe4__xgp" target="_blank">
+        <i class="ti ti-brand-google-drive" style="font-size:16px;"></i> portfolio drive
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    built with ❤ by Mohamed Ashraf · Flutter & Odoo Developer · Giza, Egypt
+  </footer>
+
+</body>
+</html>
